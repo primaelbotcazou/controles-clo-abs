@@ -1,4 +1,4 @@
-# Outil de contrôle des positions, prix et cashflows CLO / ABS
+Outil de contrôle des positions, prix et cashflows CLO / ABS
 
 Cet outil charge trois fichiers Excel, contrôle la qualité des données avec Python, puis affiche les résultats dans une application Streamlit et dans un reporting Excel.
 
@@ -9,7 +9,7 @@ Application en ligne : URL à compléter
 Code source : https://github.com/primaelbotcazou/controles-clo-abs
 
 
-## Comment ça marche
+Comment ça marche
 
 1. L'utilisateur charge les trois fichiers Excel : positions.xlsx, previous_prices.xlsx et cashflows.xlsx. Il peut aussi cocher « Utiliser les fichiers d'exemple » pour prendre ceux du dossier data.
 2. L'application vérifie que chaque fichier se lit bien et contient toutes les colonnes obligatoires. S'il manque une colonne, elle dit laquelle et bloque le traitement.
@@ -19,20 +19,18 @@ Code source : https://github.com/primaelbotcazou/controles-clo-abs
 6. Un bouton permet de télécharger le reporting Excel, avec les mêmes cinq onglets.
 
 
-## Lancer l'outil sur son ordinateur
+Lancer l'outil sur son ordinateur
 
-```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 streamlit run app.py
-```
 
 Sous Windows, la deuxième ligne devient : .venv\Scripts\activate
 
 
 
-## Les fichiers
+Les fichiers
 
 app.py : tout l'outil, dans un seul fichier, en quatre parties qui suivent l'ordre de l'énoncé : les paramètres, les traitements et contrôles, le reporting Excel et l'application Streamlit.
 
@@ -42,12 +40,12 @@ anomalies_attendues.xlsx : la liste des anomalies introduites volontairement, av
 
 reporting_controles.xlsx : le reporting généré par l'outil sur ces données.
 
-PLAN_CONSTRUCTION.md : la note sur l'utilisation de l'IA, avec mes demandes à l'IA étape par étape.
+PLAN_CONSTRUCTION.txt : la note sur l'utilisation de l'IA, avec mes demandes à l'IA étape par étape.
 
 requirements.txt : les librairies à installer.
 
 
-## Les données
+Les données
 
 38 positions réparties dans 4 portefeuilles, en 3 devises (EUR, USD, GBP), sur 3 types d'actifs (CLO Debt, CLO Equity, ABS). Les ratings vont de AAA à BB, et NR pour l'equity de CLO, qui n'est pas notée.
 
@@ -66,7 +64,7 @@ La date de valorisation est le 12/11/2026. Les prix précédents sont ceux du 11
 Trois lignes pièges ne doivent pas être signalées : une CLO Equity qui monte de 10 % (son seuil est de 15 %), une CLO Debt qui monte de 5 % pile (on signale seulement au-dessus de 5 %) et un même titre détenu par deux portefeuilles (ce n'est pas un doublon).
 
 
-## Les contrôles
+Les contrôles
 
 Colonnes obligatoires : si une colonne manque, le traitement ne se lance pas.
 
@@ -94,7 +92,7 @@ Warning, la donnée est suspecte, quelqu'un doit vérifier ;
 Information, ce n'est pas une erreur, c'est juste à savoir.
 
 
-## Modifier les règles
+Modifier les règles
 
 Toutes les règles sont dans la partie PARAMÈTRES, en haut de app.py. On les change sans toucher au code des contrôles :
 
@@ -105,7 +103,7 @@ POSITIVE_COLUMNS : les colonnes qui doivent être positives.
 SEVERITY : la sévérité de chaque contrôle.
 
 
-## Hypothèses
+Hypothèses
 
 L'énoncé parle d'un onglet « Cashflows 3D ». Je l'ai compris comme 30D, puisque le contrôle demandé porte sur les 30 prochains jours.
 
@@ -126,7 +124,7 @@ L'outil signale les anomalies mais ne corrige pas les données. Les totaux sont 
 Les fichiers ne contiennent pas de taux de change. Le nominal total est donc donné sans conversion, avec le détail par devise.
 
 
-## Limites et ce que j'aurais ajouté avec plus de temps
+Limites et ce que j'aurais ajouté avec plus de temps
 
 Une conversion de devises, avec un fichier de taux de change, pour avoir un nominal total dans une seule devise.
 
@@ -141,14 +139,14 @@ Un historique des contrôles d'un jour à l'autre.
 Un accès protégé par mot de passe à l'application.
 
 
-## Vérification
+Vérification
 
 Pour vérifier : cocher « Utiliser les fichiers d'exemple », lancer les traitements, puis comparer l'onglet Exceptions à anomalies_attendues.xlsx.
 
 Résultat : 17 anomalies trouvées sur 17 attendues.
 
 
-## Mise en ligne
+Mise en ligne
 
 L'application est hébergée sur Streamlit Community Cloud, à partir du dépôt GitHub. Sur share.streamlit.io, on se connecte avec son compte GitHub, on choisit le dépôt controles-clo-abs, la branche main et le fichier app.py. Streamlit installe les librairies et lance l'application.
 

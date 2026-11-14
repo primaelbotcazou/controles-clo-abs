@@ -1,10 +1,10 @@
-# Utilisation de l'IA et plan de construction
+Utilisation de l'IA et plan de construction
 
-## L'outil utilisé
+L'outil utilisé
 
 J'ai utilisé Claude Code, l'assistant de programmation d'Anthropic, directement dans VS Code. Il lit les fichiers du projet, écrit le code, le lance et lit les résultats.
 
-## Comment j'ai travaillé
+Comment j'ai travaillé
 
 J'ai défini ce que l'outil devait faire, à partir de l'énoncé. L'IA a écrit le premier jet : les fichiers Excel, app.py, le test et le README. J'ai ensuite relu le code, vérifié les seuils et les sévérités, contrôlé les données, testé l'outil et fait modifier plusieurs points.
 
@@ -14,17 +14,17 @@ Pour toutes les étapes : code simple, pas de classes, commentaires en français
 
 ---
 
-## Prompt 1 — L'environnement
+Prompt 1 — L'environnement
 
-Crée un environnement virtuel `.venv` et installe streamlit, pandas et openpyxl. Écris un `requirements.txt` avec les versions exactes : `streamlit==1.67.0`, `pandas==3.1.1`, `openpyxl==3.1.5`.
+Crée un environnement virtuel .venv et installe streamlit, pandas et openpyxl. Écris un requirements.txt avec les versions exactes : streamlit==1.67.0, pandas==3.1.1, openpyxl==3.1.5.
 
 Pourquoi : je fige les versions pour que l'outil tourne avec les mêmes versions sur un autre poste.
 
 ---
 
-## Prompt 2 — Les fichiers Excel d'entrée
+Prompt 2 — Les fichiers Excel d'entrée
 
-Crée directement trois fichiers Excel dans `data/` : `positions.xlsx`, `previous_prices.xlsx`, `cashflows.xlsx`, avec les colonnes de l'énoncé. Je ne veux pas de script de génération dans le projet, seulement les fichiers.
+Crée directement trois fichiers Excel dans data/ : positions.xlsx, previous_prices.xlsx, cashflows.xlsx, avec les colonnes de l'énoncé. Je ne veux pas de script de génération dans le projet, seulement les fichiers.
 
 D'abord des données propres
 
@@ -80,15 +80,15 @@ un même ISIN dans deux portefeuilles.
 
 Surligne en jaune fluo les cases en erreur.
 
-Crée un fichier `anomalies_attendues.xlsx` : une ligne par anomalie, avec le fichier, la ligne, le type d'anomalie et la sévérité attendue.
+Crée un fichier anomalies_attendues.xlsx : une ligne par anomalie, avec le fichier, la ligne, le type d'anomalie et la sévérité attendue.
 
 Pourquoi : je sais exactement ce que l'outil doit trouver. Les cas pièges vérifient qu'il ne signale pas tout et n'importe quoi.
 
 ---
 
-## Prompt 3 — `app.py` : les paramètres
+Prompt 3 — app.py : les paramètres
 
-Crée `app.py`, en quatre parties : Paramètres, Traitements et contrôles, Reporting Excel, Application Streamlit. Commence par les paramètres, en haut du fichier :
+Crée app.py, en quatre parties : Paramètres, Traitements et contrôles, Reporting Excel, Application Streamlit. Commence par les paramètres, en haut du fichier :
 
 colonnes obligatoires de chaque fichier ;
 seuils de variation : 5 % pour CLO Debt et ABS, 15 % pour CLO Equity ;
@@ -108,7 +108,7 @@ Warning : la donnée est peut-être juste, mais elle est suspecte. Une CLO Debt 
 Information : ce n'est pas une erreur, juste un fait utile à connaître. Un nouveau titre n'a pas de prix de la veille, c'est normal puisqu'il vient d'être acheté. On ne peut simplement pas calculer sa variation : l'information prévient que cette ligne n'a pas été contrôlée. Aucune action n'est nécessaire.
 
 
-## Prompt 4 — `app.py` : les traitements et contrôles
+Prompt 4 — app.py : les traitements et contrôles
 
 Écris les contrôles, avec en commentaire au-dessus de chaque bloc la phrase de l'énoncé qu'il traite :
 
@@ -134,7 +134,7 @@ une valeur illisible (du texte dans un prix) est traitée comme manquante.
 
 ---
 
-## Prompt 5 — `app.py` : le reporting Excel
+Prompt 5 — app.py : le reporting Excel
 
 Génère un fichier Excel avec les onglets Executive Summary, Exceptions, Price Movements, Cashflows 30D et Data Quality, avec les colonnes de l'énoncé.
 
@@ -144,7 +144,7 @@ Pourquoi : on repère les anomalies importantes sans rien configurer. L'énoncé
 
 ---
 
-## Prompt 6 — `app.py` : l'application Streamlit
+Prompt 6 — app.py : l'application Streamlit
 
 Écris l'interface, avec en commentaire chaque point de l'énoncé :
 
@@ -162,9 +162,9 @@ Pourquoi : les fichiers d'exemple permettent de tester l'application sans avoir 
 
 ---
 
-## Prompt 7 — Le test
+Prompt 7 — Le test
 
-Écris `test_controls.py` : il lance les contrôles sur les fichiers de `data/` et vérifie que les anomalies trouvées sont exactement celles de `anomalies_attendues.xlsx`, ni plus ni moins. Si tout est bon, il génère `reporting_controles.xlsx`.
+Écris test_controls.py : il lance les contrôles sur les fichiers de data/ et vérifie que les anomalies trouvées sont exactement celles de anomalies_attendues.xlsx, ni plus ni moins. Si tout est bon, il génère reporting_controles.xlsx.
 
 Ce test m'a servi pendant la construction. Je ne l'ai pas gardé dans les livrables, qui se limitent à ce que demande l'énoncé.
 
@@ -172,7 +172,7 @@ Pourquoi : trouver 17 anomalies ne prouve rien si ce ne sont pas les bonnes. Le 
 
 ---
 
-## Prompt 8 — Vérifier et documenter
+Prompt 8 — Vérifier et documenter
 
 Lance le test, ouvre les fichiers Excel, parcours l'application et essaie des fichiers abîmés (colonne supprimée, texte dans un prix). Puis écris le README et ce document.
 
@@ -185,7 +185,7 @@ Pourquoi : un code qui tourne sans erreur n'est pas forcément juste. L'erreur s
 
 ---
 
-## Prompt 9 — Mettre en ligne
+Prompt 9 — Mettre en ligne
 
 Mets le projet sur mon GitHub, sans le dossier .venv. Ensuite je déploie l'application sur share.streamlit.io avec app.py, et je mets l'URL dans le README.
 
@@ -193,7 +193,7 @@ Pourquoi : l'énoncé recommande une application accessible depuis un navigateur
 
 ---
 
-## Les cas pièges
+Les cas pièges
 
 Ce sont des lignes qui ressemblent à des erreurs mais qui sont normales. L'outil ne doit pas les signaler.
 
@@ -208,7 +208,7 @@ Le test vérifie que ces trois lignes ne sont pas signalées.
 
 ---
 
-## Ce que j'ai corrigé ou challengé
+Ce que j'ai corrigé ou challengé
 
 Mes choix :
 l'IA avait découpé l'outil en quatre fichiers qui s'appellent entre eux. J'ai préféré un seul fichier, app.py, qui suit l'ordre de l'énoncé, avec chaque phrase de la consigne en commentaire. C'est plus facile à suivre et à modifier ;
@@ -222,7 +222,7 @@ dans l'onglet Data Quality, un nombre s'affichait 38.0 au lieu de 38.
 
 ---
 
-## Comment j'ai vérifié les résultats
+Comment j'ai vérifié les résultats
 
 Le test, lancé pendant la construction : l'outil retrouve exactement les 17 anomalies de anomalies_attendues.xlsx, sans en oublier ni en ajouter.
 Les cas pièges : aucun des trois n'est signalé.
