@@ -6,7 +6,7 @@ Toutes les données sont synthétiques : les noms de deals, les ISIN, les prix e
 
 Application en ligne : URL à compléter
 
-Code source : https://github.com/flutchi22/controles-clo-abs
+Code source : https://github.com/primaelbotcazou/controles-clo-abs
 
 
 ## Comment ça marche
