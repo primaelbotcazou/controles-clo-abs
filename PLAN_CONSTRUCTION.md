@@ -166,6 +166,8 @@ Pourquoi : les fichiers d'exemple permettent de tester l'application sans avoir 
 
 Écris `test_controls.py` : il lance les contrôles sur les fichiers de `data/` et vérifie que les anomalies trouvées sont exactement celles de `anomalies_attendues.xlsx`, ni plus ni moins. Si tout est bon, il génère `reporting_controles.xlsx`.
 
+Ce test m'a servi pendant la construction. Je ne l'ai pas gardé dans les livrables, qui se limitent à ce que demande l'énoncé.
+
 Pourquoi : trouver 17 anomalies ne prouve rien si ce ne sont pas les bonnes. Le test vérifie aussi que les cas pièges ne sont pas signalés.
 
 ---
@@ -222,7 +224,7 @@ dans l'onglet Data Quality, un nombre s'affichait 38.0 au lieu de 38.
 
 ## Comment j'ai vérifié les résultats
 
-Le test : l'outil retrouve exactement les 17 anomalies de anomalies_attendues.xlsx, sans en oublier ni en ajouter.
+Le test, lancé pendant la construction : l'outil retrouve exactement les 17 anomalies de anomalies_attendues.xlsx, sans en oublier ni en ajouter.
 Les cas pièges : aucun des trois n'est signalé.
 Un calcul refait à la main : un prix qui passe de 98,00 à 104,37 donne bien +6,50 %.
 Les fichiers Excel relus : onglets, filtres, formats, couleurs. C'est comme ça que l'erreur sur les dates a été vue.
