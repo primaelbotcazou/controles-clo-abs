@@ -45,7 +45,7 @@ anomalies_attendues.xlsx : la liste des anomalies introduites volontairement, av
 
 reporting_controles.xlsx : le reporting généré par l'outil sur ces données.
 
-NOTE_IA.md : la note sur l'utilisation de l'IA.
+PLAN_CONSTRUCTION.md : la note sur l'utilisation de l'IA, avec mes demandes à l'IA étape par étape.
 
 requirements.txt : les librairies à installer.
 
