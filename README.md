@@ -138,16 +138,12 @@ Le signalement des doublons dans le fichier des prix précédents. Aujourd'hui, 
 
 Un historique des contrôles d'un jour à l'autre.
 
-Des tests automatiques livrés avec le projet, un par contrôle.
-
 Un accès protégé par mot de passe à l'application.
 
 
 ## Vérification
 
-Pendant la construction, un script de test a comparé les anomalies trouvées par l'outil à la liste de anomalies_attendues.xlsx. Cette liste a été remplie au moment où chaque erreur a été introduite, indépendamment du code. Le test échouait s'il manquait une anomalie ou s'il y en avait une en trop, ce qui vérifiait aussi que les lignes pièges ne sont pas signalées. Il ne fait pas partie des livrables.
-
-On peut refaire la vérification dans l'application : cocher « Utiliser les fichiers d'exemple », lancer les traitements, puis comparer l'onglet Exceptions à anomalies_attendues.xlsx.
+Pour vérifier : cocher « Utiliser les fichiers d'exemple », lancer les traitements, puis comparer l'onglet Exceptions à anomalies_attendues.xlsx.
 
 Résultat : 17 anomalies trouvées sur 17 attendues.
 
